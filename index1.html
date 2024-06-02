@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeatingHeart</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, #060b14, #152536);
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .heart {
+            height: 100px;
+            width: 100px;
+            background: #f20044;
+            position: relative;
+            transform: rotate(-45deg);
+            box-shadow: -20px 20px 160px #f20044;
+            animation: heart 0.6s linear infinite;
+            cursor: pointer;
+        }
+        @keyframes heart {
+            0% {
+                transform: rotate(-45deg) scale(1.07);
+            }
+            80% {
+                transform: rotate(-45deg) scale(1.0);
+            }
+            100% {
+                transform: rotate(-45deg) scale(0.8);
+            }
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #f20044;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -50px;
+            left: 0;
+            box-shadow: -20px -20px 160px #f20044;
+        }
+        .heart::after {
+            top: 0;
+            left: 50px;
+            box-shadow: 20px 20px 160px #f20044;
+        }
+        .message, .kiss-message {
+            text-align: center;
+            color: white;
+            font-family: 'Great Vibes', cursive;
+            font-size: 3em;
+            animation: heartbeat 1.5s infinite;
+            display: none;
+        }
+        .message p {
+            margin-top: 20px;
+        }
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        .message img, .kiss-message img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 30%;
+        }
+        .kiss-message img {
+            width: 300px;
+            height: 300px;
+            margin-top: 20px;
+        }
+        .heart-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .heart-rain .small-heart {
+            position: absolute;
+            font-size: 30px;
+            color: #f20044;
+            animation: drop 4s linear infinite;
+        }
+        @keyframes drop {
+            0% {
+                transform: translateY(-100%) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart" onclick="showMessage()"></div>
+    <div class="message" id="message">
+        <h1 id="loveMessage">I Love You!</h1>
+        <img id="heartImg" src="https://media0.giphy.com/media/26BRv0ThflsHCqDrG/giphy.webp?cid=790b7611jzrvqka01j2sj3m2lyonbr8wfzsnbdyqzw7ucwc5&ep=v1_gifs_search&rid=giphy.webp&ct=g" alt="Cute Image" style="width:200px;height:200px;" onclick="showKissMessage()">
+    </div>
+    <div class="kiss-message" id="kiss-message">
+        <h1 id="kissMessage">Can I kiss you?</h1>
+        <img id="kiss" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2VueTdlbWxxbHk5MHV0b2JvcW1rbGZ0N21vNHd2dHVmbzE0c2hnMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/tcjFerul01nujH17vk/giphy.webp" alt="">
+    </div>
+    <div class="heart-rain" id="heart-rain"></div>
+
+    <script>
+        function showMessage() {
+            document.querySelector('.heart').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+            startHeartRain();
+        }
+
+        function startHeartRain() {
+            const heartRain = document.getElementById('heart-rain');
+            setInterval(() => {
+                const heart = document.createElement('i');
+                heart.classList.add('fas', 'fa-heart', 'small-heart');
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                heartRain.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 200);
+        }
+
+        function showKissMessage() {
+            document.getElementById('message').style.display = 'none';
+            document.getElementById('kiss-message').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
