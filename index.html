@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeatingHeart</title>
+    <title>Moaaaaa</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="love.png" type="image/x-icon"> <!-- Favicon link -->
 </head>
 <body>
+    <audio id="backgroundMusic" src="song.mp3" loop></audio> <!-- Background music -->
+
     <div class="heart" onclick="showMessage()"></div>
     <div class="message" id="message">
         <h1 id="loveMessage">Anh yêu em <3 </h1>
@@ -25,6 +28,7 @@
             document.querySelector('.heart').style.display = 'none';
             document.getElementById('message').style.display = 'block';
             startHeartRain();
+            playMusic(); // Play background music when the message is shown
         }
 
         function startHeartRain() {
@@ -42,6 +46,11 @@
         function showKissMessage() {
             document.getElementById('message').style.display = 'none';
             document.getElementById('kiss-message').style.display = 'block';
+        }
+
+        function playMusic() {
+            const music = document.getElementById('backgroundMusic');
+            music.play();
         }
     </script>
 </body>
